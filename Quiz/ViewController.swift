@@ -1,37 +1,67 @@
 //
-//  ViewController.swift
-//  Quiz
-//
-//  Created by 杨佩璋 on 2017/8/11.
-//  Copyright © 2017年 云和山的彼端. All rights reserved.
+//  Copyright © 2015 Big Nerd Ranch
 //
 
 import UIKit
 
 class ViewController: UIViewController {
-    @IBOutlet weak var question: UILabel!
-    @IBOutlet weak var answer: UILabel!
-    var questions: [String] = ["小奔可不可爱？",
-                               "小奔喜欢的零食是？",
-                               "小奔喜欢吃的菜是？"]
-    var answers: [String] = ["宇宙第一可爱",
-                             "香草八喜冰淇淋",
-                             "蒸蛋"]
-    var currentQuestionIndex: Int = -1
+
+    @IBOutlet var currentQuestionLabel: UILabel!
+    @IBOutlet var nextQuestionLabel: UILabel!
+    @IBOutlet var answerLabel: UILabel!
     
-    @IBAction func nextQuestion(_ sender: UIButton) {
+    let questions: [String] = [
+        "From what is cognac made?",
+        "What is 7+7?",
+        "What is the capital of Vermont?"
+    ]
+    let answers: [String] = [
+        "Grapes",
+        "14",
+        "Montpelier"
+    ]
+    var currentQuestionIndex: Int = 0
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        currentQuestionLabel.text = questions[currentQuestionIndex]
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        nextQuestionLabel.alpha = 0.0
+    }
+    
+    @IBAction func showNextQuestion(_ sender: UIButton) {
         currentQuestionIndex += 1
         if currentQuestionIndex == questions.count {
             currentQuestionIndex = 0
         }
-        question.text = questions[currentQuestionIndex]
-        answer.text = "???"
+        
+        let question: String = questions[currentQuestionIndex]
+        nextQuestionLabel.text = question
+        questionLabelAnimationTransition()
+        answerLabel.text = "???"
     }
+    
     
     @IBAction func showAnswer(_ sender: UIButton) {
-        answer.text = answers[currentQuestionIndex]
+        let answer: String = answers[currentQuestionIndex]
+        answerLabel.text = answer
     }
     
+    func questionLabelAnimationTransition() {
+        UIView.animateKeyframes(withDuration: 0.5, delay: 0, options: [], animations: {
+            self.currentQuestionLabel.alpha = 0.0
+            self.nextQuestionLabel.alpha = 1.0
+        }) { _ in
+            swap(&self.currentQuestionLabel, &self.nextQuestionLabel)
+        }
+    }
     
+    func address<T: AnyObject>(o: T) -> String {
+        return String.init(format: "%018p", unsafeBitCast(o, to: Int.self))
+    }
+
 }
 
