@@ -71,12 +71,14 @@
                     <connections>
                         <outlet property="answerLabel" destination="jo5-Ge-HWT" id="guP-6F-Sdh"/>
                         <outlet property="currentQuestionLabel" destination="4iw-bq-gbF" id="34x-AQ-8uQ"/>
+                        <outlet property="currentQuestionLabelCenterConstraint" destination="9OQ-f5-NHi" id="WTE-Sr-kNE"/>
                         <outlet property="nextQuestionLabel" destination="Lxq-zS-fxN" id="sQV-aM-seB"/>
+                        <outlet property="nextQuestionLabelCenterConstraint" destination="GJ7-CD-e2i" id="84A-3p-Wrs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="72" y="239"/>
+            <point key="canvasLocation" x="-198" y="252"/>
         </scene>
     </scenes>
 </document>
